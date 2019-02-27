@@ -93,6 +93,7 @@ public class Enemy : MonoBehaviour
         /*transform.position = Vector3.MoveTowards(transform.position, point.position, moveSpeed * Time.deltaTime);
         transform.LookAt(point.position);*/
 
-        // 5 - 
+        // 5 - Use NavMeshAgent to follow the current waypoint
+        agent.SetDestination(point.position);
     }
 }
