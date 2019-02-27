@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 // <> - Guillemet (greater than or less than)
 // () - Parenthesis
@@ -13,8 +14,10 @@ public class Enemy : MonoBehaviour
     public Transform waypointParent; // Variables can be thought of as containers. So the container 'waypointParent' is going to be containing Transform data.
     public float moveSpeed = 2f; // You also have to use the 'f' in C++, btw
     public float stoppingDistance = 1f;
-    public float gravityDistance = 2f;
-    public Rigidbody rBody;
+    //public float gravityDistance = 2f;
+    //public Rigidbody rBody;
+
+    private NavMeshAgent agent;
 
     public Transform[] waypoints;
     private int currentIndex = 1;
@@ -48,8 +51,8 @@ public class Enemy : MonoBehaviour
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(point.position, stoppingDistance);
             // Draw gravity sphere
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawWireSphere(point.position, gravityDistance);
+            /*Gizmos.color = Color.cyan;
+            Gizmos.DrawWireSphere(point.position, gravityDistance);*/
         }      
     }
 
@@ -62,7 +65,7 @@ public class Enemy : MonoBehaviour
         float distance = Vector3.Distance(transform.position, point.position);
 
         // 2.1 - If distance is less than gravity distance
-        if(distance < gravityDistance)
+        /*if(distance < gravityDistance)
         {
             // Turn gravity off
             rBody.useGravity = false;
@@ -71,7 +74,7 @@ public class Enemy : MonoBehaviour
         {
             // Turn gravity on
             rBody.useGravity = true;
-        }
+        }*/
 
         // 3 - If distance is less than stopping distance
         if(distance < stoppingDistance)
@@ -82,12 +85,14 @@ public class Enemy : MonoBehaviour
             if(currentIndex >= waypoints.Length)
             {
                 // 4.2 - Set currentIndex to 1
-                currentIndex = 1;
+                currentIndex = 1; // Can use 0 to take it back to the parent object after index resets
             }
         }
 
         // 5 - Translate Enemy towards current waypoint. Translation is moving from one point to another
-        transform.position = Vector3.MoveTowards(transform.position, point.position, moveSpeed * Time.deltaTime);
-        transform.LookAt(point.position);
+        /*transform.position = Vector3.MoveTowards(transform.position, point.position, moveSpeed * Time.deltaTime);
+        transform.LookAt(point.position);*/
+
+        // 5 - 
     }
 }
