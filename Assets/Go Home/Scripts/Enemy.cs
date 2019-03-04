@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour
     void OnDrawGizmos() // Just visualing how the code is working (specifically Patrol)
     {
         // If waypoints is not null AND waypoints is not empty
-        if(waypoints != null && waypoints.Length > 0)
+        if (waypoints != null && waypoints.Length > 0)
         {
             // Get current waypoint
             Transform point = waypoints[currentIndex];
@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
             // Draw gravity sphere
             /*Gizmos.color = Color.cyan;
             Gizmos.DrawWireSphere(point.position, gravityDistance);*/
-        }      
+        }
     }
 
     void Patrol()
@@ -77,12 +77,12 @@ public class Enemy : MonoBehaviour
         }*/
 
         // 3 - If distance is less than stopping distance
-        if(distance < stoppingDistance)
+        if (distance < stoppingDistance)
         {
             // 4 - Move to next waypoint
             currentIndex++;
             // 4.1 - Preventing OutOfRangeException error (where you exceed the array's length)
-            if(currentIndex >= waypoints.Length)
+            if (currentIndex >= waypoints.Length)
             {
                 // 4.2 - Set currentIndex to 1
                 currentIndex = 1; // Can use 0 to take it back to the parent object after index resets
@@ -90,10 +90,18 @@ public class Enemy : MonoBehaviour
         }
 
         // 5 - Translate Enemy towards current waypoint. Translation is moving from one point to another
-        /*transform.position = Vector3.MoveTowards(transform.position, point.position, moveSpeed * Time.deltaTime);
-        transform.LookAt(point.position);*/
+        // Non-Physics (Translation) - Simply because we're moving from point A to B
+        //transform.position += transform.forward * moveSpeed * Time.deltaTime;
+
+        // Physics - Using physics to move from point A to point B
 
         // 5 - Use NavMeshAgent to follow the current waypoint
-        agent.SetDestination(point.position);
+        // AI - Processing the path from point A to point B
+        //agent.SetDestination(point.position);
     }
 }
+
+
+
+
+//transform.position = Vector3.MoveTowards(transform.position, point.position, moveSpeed* Time.deltaTime);
