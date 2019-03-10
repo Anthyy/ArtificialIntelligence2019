@@ -91,7 +91,7 @@ public class Enemy : MonoBehaviour
 
         // 5 - Translate Enemy towards current waypoint. Translation is moving from one point to another
         // Non-Physics (Translation) - Simply because we're moving from point A to B
-        //transform.position += transform.forward * moveSpeed * Time.deltaTime;
+        transform.position += transform.forward * moveSpeed * Time.deltaTime; // In this case, to multiply by Time.deltaTime is to convert the movement speed from frames to seconds, essentially making it slower. If you didn't use Time.deltaTime, the movement would be extremely fast.
 
         // Physics - Using physics to move from point A to point B
 
